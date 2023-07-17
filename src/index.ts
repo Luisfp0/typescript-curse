@@ -93,8 +93,109 @@ function logger(msg: string): void {
 
 logger('teste!')
 
-function greeting(name: string, greet?: string) {
-  console.log(`Ola ${greet} ${name}`)
+function greeting(name: string, greet?: string):void {
+  if(greet) {
+    console.log(`Ola ${greet} ${name}`)
+    return;
+  } else {
+    console.log(`Olá ${name}`)
+  }
 }
 
 greeting("Luis")
+greeting("Luis", 'Sir')
+
+
+//interfaces
+interface MathFunctionParams {
+  n1: number,
+  n2: number
+}
+
+function sumNumbers(nums: MathFunctionParams) {
+  return nums.n1 + nums.n2
+}
+
+console.log(sumNumbers({n1:1, n2:2}))
+
+
+function multiplyNumbers(nums: MathFunctionParams) {
+  return nums.n1 * nums.n2;
+}
+
+const someNumbers:MathFunctionParams = {
+  n1: 5,
+  n2: 10
+}
+
+console.log(multiplyNumbers(someNumbers))
+
+//narrowing
+//checagem de tipos
+function doSomething(info: number | boolean) {
+  if(typeof info === 'number') {
+    console.log(`O número é ${info}`)
+    return
+  }
+  console.log('Não foi passado um número')
+}
+
+doSomething(true)
+doSomething(5)
+
+//generics
+function showArraysItens<T>(arr:T[]) {
+  arr.forEach((item) =>{
+    console.log(`Item: ${item}`)
+  })
+}
+
+const a1 = [1, 2, 3]
+const a2 = ['1', 'b', 'c ']
+
+showArraysItens(a1)
+showArraysItens(a2)
+
+//classes
+class User {
+  name
+  role
+  isAproved
+
+  constructor(name: string, role: string, isAproved: boolean) {
+    this.name = name
+    this.role = role
+    this.isAproved = isAproved
+  }
+
+  showUserName() {
+    console.log(`O nome do usuário é: ${this.name}`)
+  }
+}
+
+const zeca = new User('Zeca', 'Admin', true)
+console.log(zeca)
+zeca.showUserName()
+
+//interfaces em classes
+interface IVehicle {
+  brand: string
+  showBrand(): void
+}
+
+class Car implements IVehicle {
+  brand
+  wheels
+
+  constructor(brand: string, wheels: number) {
+    this.brand = brand
+    this.wheels = wheels
+  }
+  showBrand(): void {
+    console.log(`A marca do carro é ${this.brand}`)
+    console.log(`Ele tem ${this.wheels} rodas`)
+  }
+}
+
+const fusca  = new Car('VW', 4)
+fusca.showBrand()

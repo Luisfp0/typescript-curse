@@ -66,6 +66,72 @@ function logger(msg) {
 }
 logger('teste!');
 function greeting(name, greet) {
-    console.log(`Ola ${greet} ${name}`);
+    if (greet) {
+        console.log(`Ola ${greet} ${name}`);
+        return;
+    }
+    else {
+        console.log(`Olá ${name}`);
+    }
 }
 greeting("Luis");
+greeting("Luis", 'Sir');
+function sumNumbers(nums) {
+    return nums.n1 + nums.n2;
+}
+console.log(sumNumbers({ n1: 1, n2: 2 }));
+function multiplyNumbers(nums) {
+    return nums.n1 * nums.n2;
+}
+const someNumbers = {
+    n1: 5,
+    n2: 10
+};
+console.log(multiplyNumbers(someNumbers));
+//narrowing
+//checagem de tipos
+function doSomething(info) {
+    if (typeof info === 'number') {
+        console.log(`O número é ${info}`);
+        return;
+    }
+    console.log('Não foi passado um número');
+}
+doSomething(true);
+doSomething(5);
+//generics
+function showArraysItens(arr) {
+    arr.forEach((item) => {
+        console.log(`Item: ${item}`);
+    });
+}
+const a1 = [1, 2, 3];
+const a2 = ['1', 'b', 'c '];
+showArraysItens(a1);
+showArraysItens(a2);
+//classes
+class User {
+    constructor(name, role, isAproved) {
+        this.name = name;
+        this.role = role;
+        this.isAproved = isAproved;
+    }
+    showUserName() {
+        console.log(`O nome do usuário é: ${this.name}`);
+    }
+}
+const zeca = new User('Zeca', 'Admin', true);
+console.log(zeca);
+zeca.showUserName();
+class Car {
+    constructor(brand, wheels) {
+        this.brand = brand;
+        this.wheels = wheels;
+    }
+    showBrand() {
+        console.log(`A marca do carro é ${this.brand}`);
+        console.log(`Ele tem ${this.wheels} rodas`);
+    }
+}
+const fusca = new Car('VW', 4);
+fusca.showBrand();
